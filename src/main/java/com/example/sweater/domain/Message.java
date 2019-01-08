@@ -3,7 +3,7 @@ package com.example.sweater.domain;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "Messages")
+@Table(name = "messages")
 public class Message {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
