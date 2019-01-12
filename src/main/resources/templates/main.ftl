@@ -7,6 +7,10 @@
     </div>
 
     <div>
+        <a href="/user/list">Пользователи</a>
+    </div>
+
+    <div>
         <form method="post" action="main">
             <input type="text" name="text" placeholder="Введите сообщение">
             <input type="text" name="tag" placeholder="Тэг">
