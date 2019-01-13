@@ -1,38 +1,49 @@
 <#import "parts/common.ftl" as c>
-<#import "parts/login.ftl" as l>
 
 <@c.page>
-    <div>
-        <@l.logout />
-    </div>
-
-    <div>
-        <a href="/user/list">Пользователи</a>
-    </div>
-
-    <div>
-        <form method="post" action="main">
-            <input type="text" name="text" placeholder="Введите сообщение">
-            <input type="text" name="tag" placeholder="Тэг">
-            <input type="hidden" name="_csrf" value="${_csrf.token}" />
-            <button type="submit">Добавить</button>
-        </form>
-    </div>
-
-    <form method="get" action="main">
-        <input type="text" name="filter" value="${filter}">
-        <button type="submit">Найти</button>
-    </form>
-
-    <div>Список сообщений</div>
-    <#list messages as message>
-        <div>
-            <b>${message.id!}</b>
-            <span>${message.text!}</span>
-            <i>${message.tag!}</i>
-            <strong>${(message.author.username)!"&lt;none&gt;"}</strong>
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <form method="get" action="main" class="form-inline">
+                <input type="text" name="filter" class="form-control" value="${filter!}">
+                <button type="submit" class="btn btn-primary ml-2">Найти</button>
+            </form>
         </div>
-    <#else>
-        No message
-    </#list>
+    </div>
+
+    <a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false"
+       aria-controls="collapseExample">
+        Add New Message
+    </a>
+
+    <div class="collapse" id="collapseExample">
+        <div class="form-group mt-3">
+            <form method="post" action="main">
+                <div class="form-group">
+                    <input type="text" name="text" class="form-control" placeholder="Введите сообщение">
+                </div>
+                <div class="form-group">
+                    <input type="text" name="tag" class="form-control" placeholder="Тэг">
+                </div>
+                <input type="hidden" name="_csrf" value="${_csrf.token}" />
+                <button type="submit" class="btn btn-primary">Добавить</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="card-columns">
+        <#list messages as message>
+            <div class="card my-3">
+                <div class="m-2">
+                    <span>${message.text!}</span>
+                    <i>${message.tag!}</i>
+                </div>
+                <div class="card-footer text-muted">
+                    ${(message.author.username)!"&lt;none&gt;"}
+                </div>
+            </div>
+        <#else>
+            No message
+        </#list>
+    </div>
+
 </@c.page>
